@@ -1,0 +1,38 @@
+INSERT INTO `student_details` (`s_id`, `sname`, `doj`, `sadd`, `sgender`, `sfaculty`, `sgrade`, `stype`) VALUES ('1', 'tom', '2023-09-14', 'hfiuwhivhhohiwhihi', 'male', 'walter', 'Grade A', 'new');
+
+
+
+
+if(isset($_POST['submit'])){
+    $stnames=$_POST['stname'];
+    $stemails=$_POST['stemail'];
+    $stpasss=$_POST['stpass'];
+    $strepasss=$_POST['strepass'];
+    $errors=array();
+    if(empty($stnames)OR empty($stemails) OR empty($stpasss) OR empty($strepasss)){
+        array_push($errors,"All fields are not filled");
+
+    }
+    if(!filter_var($stemails, FILTER_VALIDATE_EMAIL)){
+        array_push($errors,"Email is not valid");
+    }
+    if(strlen($stpasss)<8){
+        array_push($errors,"Password should be 8 characters");
+    }
+    if($stpasss!==$strepasss){
+        array_push($errors,"Password does not match");
+    }
+    if(count($errors)>0){
+        foreach($errors as $value){
+            echo "<div class ='alert alert-danger'>$value</div>";
+        }
+       
+    }
+    else{
+        //code
+    }
+}
+
+
+
+  <label for="stname">NAME</label>
